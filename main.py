@@ -18,20 +18,41 @@ to recognize the item that you draw on the canvas. See the [notebook of the mode
 (https://colab.research.google.com/drive/1hh1lcDcXK3oxL2cEAPvlNXUY10bAhZp-?usp=sharing) for more details.
 """)
 
+col1, col2 = st.beta_columns([6, 4])
 
 # Drawing area
-st.subheader("Drawing area")
-st.markdown("Draw a banana or an axe. Don't make it easy !")
-canvas_result = st_canvas(
-    stroke_width=20,
-    stroke_color="#fff",
-    background_color="#000",
-    update_streamlit=True,
-    drawing_mode="freedraw",
-    key="canvas",
-    width=400
-)
+with col1:
+
+    st.subheader("Drawing area")
+    st.markdown("Draw something cool, don't make it easy !")
+    canvas_result = st_canvas(
+        stroke_width=20,
+        stroke_color="#fff",
+        background_color="#000",
+        update_streamlit=True,
+        drawing_mode="freedraw",
+        key="canvas",
+        width=400
+    )
+
 image = Image(canvas_result.image_data)
+
+with col2:
+    st.subheader("This model can recognize...")
+    st.markdown("""
+    Between 8 different items:
+    
+     - Banana
+     - Axe
+     - Spider
+     - Hand
+     - House
+     - Eyeglasses
+     - Cup
+     - Diamond
+     
+     And more soon !
+     """)
 
 
 # Check if the user has written something
@@ -45,15 +66,16 @@ if (image.image is not None) and (not image.is_empty()):
     # Display the image predicted by the model
     with col3:
 
+        base_url = "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/"
         images = [
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/banana.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/axe.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/spider.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/hand.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/house.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/eyeglasses.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/cup.png",
-            "https://f003.backblazeb2.com/file/joffreybvn/deepdrawing/diamond.png",
+            base_url + "banana.png",
+            base_url + "axe.png",
+            base_url + "spider.png",
+            base_url + "hand.png",
+            base_url + "house.png",
+            base_url + "eyeglasses.png",
+            base_url + "cup.png",
+            base_url + "diamond.png",
         ]
 
         st.subheader("Recognized image")

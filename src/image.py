@@ -63,6 +63,7 @@ class Image:
     def is_empty(self):
         """Return true if self.image is an empty black image."""
 
+        self.get_streamlit_displayable()
         if np.max(self.streamlit) == np.min(self.streamlit) == .0:
             return True
 
